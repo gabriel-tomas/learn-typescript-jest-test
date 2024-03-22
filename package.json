@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "jest",
+    "test:silent": "jest --watchAll --silent --noStackTrace"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
