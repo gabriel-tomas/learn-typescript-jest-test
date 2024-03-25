@@ -7,10 +7,15 @@ import Product from './classes/product';
 import { CompanyCustomer, IndividualCustomer } from './classes/customer';
 import { MessagingProtocol } from './services/contracts/messagingProtocol';
 
+import { Discount } from './classes/contracts/discount';
+
 /* const tenPercentDiscount = new TenPercentDiscount(); */
 const fiftyPercentDiscount = new FiftyPercentDiscount();
 
-const cart = new Cart(fiftyPercentDiscount);
+class DiscountMock extends Discount {
+  protected readonly discount = 0;
+}
+const cart = new Cart(new DiscountMock());
 const messaging = new Messaging();
 const persistency = new Persistency();
 const customer1 = new IndividualCustomer('Gabriel', 'Tomás', '000.000.000-00');
