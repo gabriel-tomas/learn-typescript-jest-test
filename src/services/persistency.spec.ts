@@ -1,17 +1,29 @@
-describe('TESTANDO ALGO 1', () => {
-  it('should return one', () => {
-    const number = 1;
-    expect(number).toBe(1);
-  });
-  it('descrição do teste (IT) 2', () => {
-    const number = 2;
-    expect(number).toBe(2);
-  });
-});
+import { Persistency } from './persistency';
 
-describe('TESTANDO OUTRA COISA 2', () => {
-  test('descrição do teste (TEST)', () => {
-    const string = 'olá';
-    expect(string).toBe('olá');
+describe('Persistency', () => {
+  afterEach(() => jest.clearAllMocks());
+
+  it('class should have saveOrder', () => {
+    const sut = new Persistency();
+    expect(sut).toHaveProperty('saveOrder');
+  });
+  describe('Persistency - method: saveOrder', () => {
+    it('must return undefined', () => {
+      const sut = new Persistency();
+      const saveOrder = sut.saveOrder();
+      expect(saveOrder).toBeUndefined();
+    });
+    it('must call console.log once', () => {
+      const sut = new Persistency();
+      const consoleSpy = jest.spyOn(console, 'log');
+      sut.saveOrder();
+      expect(consoleSpy).toHaveBeenCalledTimes(1);
+    });
+    it('must call console.log once with "Pedido salvo com sucesso"', () => {
+      const sut = new Persistency();
+      const consoleSpy = jest.spyOn(console, 'log');
+      sut.saveOrder();
+      expect(consoleSpy).toHaveBeenCalledWith('Pedido salvo com sucesso');
+    });
   });
 });
