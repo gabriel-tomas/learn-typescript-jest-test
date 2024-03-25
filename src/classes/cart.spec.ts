@@ -70,6 +70,18 @@ describe('Cart', () => {
       const { sut } = createSutWithProducts();
       expect(sut.total()).toBeCloseTo(104.46);
     });
+    it('should call discount.applyDiscount once when totalWithDiscount is called', () => {
+      const { sut, discountMock } = createSutWithProducts();
+      const discountMockSpy = jest.spyOn(discountMock, 'applyDiscount');
+      sut.totalWithDiscount();
+      expect(discountMockSpy).toHaveBeenCalledTimes(1);
+    });
+    it('should call discount.applyDiscount with total price when totalWithDiscount is called', () => {
+      const { sut, discountMock } = createSutWithProducts();
+      const discountMockSpy = jest.spyOn(discountMock, 'applyDiscount');
+      sut.totalWithDiscount();
+      expect(discountMockSpy).toHaveBeenCalledWith(sut.total());
+    });
   });
 
   describe('method: clear', () => {
